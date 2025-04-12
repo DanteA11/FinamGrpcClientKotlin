@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package proto.tradeapi.v1;
+
+option csharp_namespace = "Finam.TradeApi.Proto.V1";
+
+import "proto_common.proto";
+
+// Security price sign.
+// Разрешенный знак цены у инструмента.
+enum PriceSign {
+  // Value is not specified. Do not use.
+  // Значение не указано. Не использовать.
+  // Это поле используется, когда информация о цене не задана (новейшие IPO, которые еще не начали торговаться, последствия после "падения" сервера).
+  PRICE_SIGN_UNSPECIFIED = 0;
+  // Positive.
+  // Положительная цена.
+  // Указывает на то, что цена акции положительна. Тicker с таким значением подразумевает, что стоимость акции выше нуля и органично подходит для биржевой торговли (акции, облигации, фонды).
+  PRICE_SIGN_POSITIVE = 1;
+  // Non negative.
+  // Не отрицательная цена.
+  // Обозначает, что цена может быть нулевой или положительной. Такое значение подразумевает отсутствие активной торговли по определённой цене или временное приостановление (криптовалюты, облигации с нулевым купоном).
+  PRICE_SIGN_NON_NEGATIVE = 2;
+  // Any.
+  // Любая цена, без ограничения на знак.
+  // Позволяет произвольное значение цены, как положительное, так и отрицательное (фьючерсы, опционы).
+  PRICE_SIGN_ANY = 3;
+}
+
+// Security.
+// Инструмент.
+message Security {
+  // Security code.
+  // Код инструмента.
+  string code = 1;
+  // Security board.
+  // Основной режим торгов инструмента.
+  string board = 2;
+  // Market.
+  // Рынок инструмента.
+  Market market = 3;
+  // Number of decimal digits in the price value.
+  // Количество знаков в дробной части цены.
+  sint32 decimals = 4;
+  // Lot size.
+  // Размер лота.
+  sint32 lot_size = 5;
+  // Price min step.
+  // Минимальный шаг цены.
+  sint32 min_step = 6;
+  // Currency.
+  // Валюта номинала инструмента.
+  string currency = 7;
+  // Instrument code (not used).
+  // Код инструмента (не используется).
+  reserved 8;
+  reserved "instrument_code";
+  // Security name.
+  // Название инструмента.
+  string short_name = 9;
+  // Параметры инструмента. Значение представлено в виде битовой маски.
+  // 0 Нет параметров.
+  // 1 Инструмент торгуется на Бирже.
+  // 2 Инструмент допущен к торгам у Брокера - существенно для НЕ ГЛАВНЫХ трейдеров, главным доступны все инструменты, торгуемые на биржах.
+  // 4 Рыночные заявки (без ограничения по цене) разрешены.
+  // 8 Признак маржинальности бумаги.
+  // 16 Опцион Call.
+  // 32 Опцион Put.
+  // 48 Фьючерс: Call | Put.
+  // 64 Разрешен для резидентов.
+  // 128 Разрешен для нерезидентов.
+  int32 properties = 10;
+  // Timezone name.
+  // Имя таймзоны.
+  string time_zone_name = 11;
+  // The price unit cost for one security (not for the lot)), excluding accrued interest.
+  // Стоимость пункта цены одного инструмента (не лота), без учета НКД.
+  double bp_cost = 12;
+  // Current accrued interest.
+  // Текущий НКД.
+  double accrued_interest = 13;
+  // Allowed price: positive, non negative, any.
+  // Допустимая цена: положительная, неотрицательная, любая.
+  PriceSign price_sign = 14;
+  // Ticker.
+  // Код инструмента (тикер) на биржевой площадке листинга.
+  string ticker = 15;
+  // The split ratio of a security in one standard lot.
+  // Коэффициент дробления ценной бумаги в одном стандартном лоте.
+  sint32 lot_divider = 16;
+}
