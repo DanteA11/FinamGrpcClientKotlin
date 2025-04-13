@@ -5,11 +5,11 @@
         </encoder>
     </appender>
 
-    <logger name="ru.finam.defaultclient.FinamGrpcDefaultClient" level="INFO"/>
-    <logger name="ru.finam.subscribe.FinamGrpcSubscribeClient" level="INFO"/>
+    <logger name="ru.finam.client.defaultclient.FinamGrpcDefaultClient" level="DEBUG"/>
+    <logger name="ru.finam.client.subscribe.FinamGrpcSubscribeClient" level="DEBUG"/>
 
 
-    <root level="WARNING">
+    <root level="WARN">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>

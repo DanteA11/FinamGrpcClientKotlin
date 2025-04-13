@@ -1,8 +1,8 @@
-package ru.finam.subscribe
+package ru.finam.client.subscribe
 
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
-import ru.finam.ClientHolder
+import ru.finam.client.ClientHolder
 
 abstract class AbstractTest {
 

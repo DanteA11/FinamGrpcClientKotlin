@@ -1,8 +1,8 @@
-package ru.finam.subscribe
+package ru.finam.client.subscribe
 
 import proto.tradeapi.v1.ProtoCommon.ResponseEvent
 import proto.tradeapi.v1.ProtoEvents
-import ru.finam.defaultclient.ClientInterface
+import ru.finam.client.defaultclient.ClientInterface
 
 /**
  * Интерфейс для взаимодействия с подписками Finam GRPC Api.

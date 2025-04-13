@@ -1,4 +1,4 @@
-package ru.finam.defaultclient
+package ru.finam.client.defaultclient
 
 import com.google.protobuf.Timestamp
 import com.google.type.Date

@@ -1,4 +1,4 @@
-package ru.finam.subscribe
+package ru.finam.client.subscribe
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource
 import proto.tradeapi.v1.ProtoCommon
 import proto.tradeapi.v1.ProtoEvents
 import proto.tradeapi.v1.ProtoOrders
-import ru.finam.Utils
+import ru.finam.client.Utils
 import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -70,7 +70,7 @@ class SubscriptionTest : AbstractTest() {
         client.subscribeOrdersTradesAll(requestId, listOf(clientId))
 
         for (i in 1..6) {
-            if (responseEvents.size != 0)
+            if (responseEvents.isNotEmpty())
                 break
             if (i == 6)
                 assertTrue("Нет ответа на запрос подписки") { false }
@@ -144,7 +144,7 @@ class SubscriptionTest : AbstractTest() {
         client.subscribeOrdersTradesAll(requestId, listOf(clientId))
 
         for (i in 1..6) {
-            if (responseEvents.size != 0)
+            if (responseEvents.isNotEmpty())
                 break
             if (i == 6)
                 assertTrue("Нет ответа на запрос подписки") { false }
@@ -212,7 +212,7 @@ class SubscriptionTest : AbstractTest() {
         client.subscribeOrderBook(requestId, securityBoard, securityCode)
 
         for (i in 1..6) {
-            if (responseEvents.size != 0)
+            if (responseEvents.isNotEmpty())
                 break
             if (i == 6)
                 assertTrue("Нет ответа на запрос подписки") { false }
@@ -223,7 +223,7 @@ class SubscriptionTest : AbstractTest() {
             assertTrue { r.success }
         }
         delay(5.seconds)
-        assertTrue { orderBookEvents.size > 0 }
+        assertTrue { orderBookEvents.isNotEmpty() }
         for (ob in orderBookEvents) {
             assertEquals(ob.securityBoard, securityBoard)
             assertEquals(ob.securityCode, securityCode)
@@ -281,7 +281,7 @@ class SubscriptionTest : AbstractTest() {
 
         checkVtb = false
         checkSber = false
-        assertTrue { orderBookEvents.size > 0 }
+        assertTrue { orderBookEvents.isNotEmpty() }
         for (ob in orderBookEvents) {
             assertEquals(ob.securityBoard, securityBoard)
             if (ob.securityCode.equals(securityCode))

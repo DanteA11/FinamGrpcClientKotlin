@@ -1,4 +1,4 @@
-package ru.finam.defaultclient
+package ru.finam.client.defaultclient
 
 import com.google.protobuf.Timestamp
 import grpc.tradeapi.v1.GrpcSecurities

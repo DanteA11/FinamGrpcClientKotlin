@@ -1,4 +1,4 @@
-package ru.finam.defaultclient
+package ru.finam.client.defaultclient
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource
 import proto.tradeapi.v1.ProtoCommon
 import proto.tradeapi.v1.ProtoOrders
 import proto.tradeapi.v1.ProtoStops
-import ru.finam.Utils
+import ru.finam.client.Utils
 import kotlin.test.assertEquals
 import kotlin.time.Duration.Companion.seconds
 

@@ -1,4 +1,4 @@
-package ru.finam
+package ru.finam.client
 
 import com.google.protobuf.Timestamp
 import kotlinx.coroutines.runBlocking
@@ -6,7 +6,7 @@ import proto.tradeapi.v1.ProtoCandles
 import proto.tradeapi.v1.ProtoCommon
 import proto.tradeapi.v1.ProtoOrders
 import proto.tradeapi.v1.ProtoStops
-import ru.finam.defaultclient.ClientInterface
+import ru.finam.client.defaultclient.ClientInterface
 import java.math.RoundingMode
 import java.time.LocalDateTime
 import java.time.ZoneOffset

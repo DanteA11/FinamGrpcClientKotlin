@@ -1,4 +1,4 @@
-package ru.finam.subscribe
+package ru.finam.client.subscribe
 
 import com.google.protobuf.GeneratedMessageV3
 import grpc.tradeapi.v1.EventsGrpcKt.EventsCoroutineStub
@@ -7,7 +7,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.consumeAsFlow
 import proto.tradeapi.v1.ProtoCommon.ResponseEvent
 import proto.tradeapi.v1.ProtoEvents
-import ru.finam.defaultclient.FinamGrpcDefaultClient
+import ru.finam.client.defaultclient.FinamGrpcDefaultClient
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.channels.Channel as Ch
 
@@ -58,7 +58,7 @@ class FinamGrpcSubscribeClient(
      * @param event Входящее событие.
      */
     private suspend fun onEvent(event: ProtoEvents.Event) {
-        logger.info { "Пришло событие: $event" }
+        logger.debug { "Пришло событие: $event" }
         if (!event.order.equals(forComparison[0]))
             onOrder(event.order)
         else if (!event.trade.equals(forComparison[1]))

@@ -1,4 +1,4 @@
-package ru.finam.defaultclient
+package ru.finam.client.defaultclient
 
 import com.google.protobuf.DoubleValue
 import com.google.protobuf.StringValue
