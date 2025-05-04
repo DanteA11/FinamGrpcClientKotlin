@@ -29,6 +29,7 @@ class FinamGrpcSubscribeClient(
         ResponseEvent.newBuilder().build()
     )
     private val mainScope = CoroutineScope(Dispatchers.Default)
+    private val ioScope = CoroutineScope(Dispatchers.IO)
 
     override var onOrder: suspend (ProtoEvents.OrderEvent) -> Unit = this::defaultCallback
     override var onTrade: suspend (ProtoEvents.TradeEvent) -> Unit = this::defaultCallback
@@ -38,13 +39,14 @@ class FinamGrpcSubscribeClient(
 
     init {
         logger.info { "Запуск обработки подписок" }
-        mainScope.launch { subscriptionHandler() }
+        ioScope.launch { subscriptionHandler() }
         logger.info { "Запуск поддержания активности" }
-        mainScope.launch { keepAliveHandler() }
+        ioScope.launch { keepAliveHandler() }
     }
 
     override fun stop() {
         mainScope.cancel()
+        ioScope.cancel()
         logger.info { "Поток обработки подписок остановлен" }
         super.stop()
     }
